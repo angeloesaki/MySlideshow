@@ -64,17 +64,31 @@
     document.querySelectorAll(".thumbnails > li")[target].click();
   });
 
+  let timeoutId;
+
   function playSlideshow() {
     // 第二引数に設定したい時間を記入
     // 一定時間毎に繰り返す処理
-    setTimeout(() => {
+    //setTimeout()の返り値をtimeoutIdに入れる
+    timeoutId = setTimeout(() => {
       next.click();
       playSlideshow();
     }, 1000);
   }
 
+  let isPlaying = false;
+
   const play = document.getElementById("play");
   play.addEventListener("click", () => {
-    playSlideshow();
+    if (isPlaying === false) {
+      playSlideshow();
+      play.textContent = "Pause";
+    } else {
+      // clearTimeout();にはsetTimeoutの返り値が必要
+      clearTimeout(timeoutId);
+      play.textContent = "Play";
+    }
+    //論理否定演算子を用いてisPlayingの値を#playがクリックされるたびに反転させる
+    isPlaying = !isPlaying;
   });
 }
