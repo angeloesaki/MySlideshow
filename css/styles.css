@@ -16,10 +16,31 @@ ul {
 #main {
   width: 300px;
   height: 200px;
+  margin-bottom: 8px;
+}
+
+nav {
+  margin-bottom: 8px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
 }
 
 nav li {
   border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 4px;
+  text-align: center;
+  cursor: pointer;
+  /* 連打された場合テキストが選択されてしまわないように */
+  user-select: none;
+}
+
+nav li:hover {
+  background: #f8f8f8;
 }
 
 #play {
