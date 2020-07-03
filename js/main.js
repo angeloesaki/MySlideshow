@@ -20,6 +20,7 @@
   mainImage.src = images[currentIndex];
 
   // imageがimages配列の何番目(インデックス番号)がforEach()の第二引数で表現できるようになる
+  // サムネ表示&クリックでcurrentクラス移動機能
   images.forEach((image, index) => {
     const img = document.createElement("img");
     img.src = image;
@@ -41,6 +42,7 @@
     document.querySelector(".thumbnails").appendChild(li);
   });
 
+  // 次へボタン機能
   const next = document.getElementById("next");
   next.addEventListener("click", () => {
     let target = currentIndex + 1;
@@ -49,5 +51,30 @@
     }
     // click()はその要素がクリックされた時の処理を実行してくれる
     document.querySelectorAll(".thumbnails > li")[target].click();
+  });
+
+  // 前へボタン機能
+  const prev = document.getElementById("prev");
+  prev.addEventListener("click", () => {
+    let target = currentIndex - 1;
+    if (target < 0) {
+      target = images.length - 1;
+    }
+    // click()はその要素がクリックされた時の処理を実行してくれる
+    document.querySelectorAll(".thumbnails > li")[target].click();
+  });
+
+  function playSlideshow() {
+    // 第二引数に設定したい時間を記入
+    // 一定時間毎に繰り返す処理
+    setTimeout(() => {
+      next.click();
+      playSlideshow();
+    }, 1000);
+  }
+
+  const play = document.getElementById("play");
+  play.addEventListener("click", () => {
+    playSlideshow();
   });
 }
